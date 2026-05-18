@@ -2,19 +2,13 @@ import { useState } from "react";
 import { motion } from "motion/react";
 import { Phone, Mail, MapPin, Send, Github, Twitter, Linkedin, Instagram } from "lucide-react";
 import { SectionHeader } from "./Section";
-import { toast } from "sonner";
 
 export function Contact() {
   const [sending, setSending] = useState(false);
 
-  const onSubmit = (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
+  const onSubmit = () => {
     setSending(true);
-    setTimeout(() => {
-      setSending(false);
-      toast.success("Message sent! We'll get back to you within 24 hours.");
-      (e.target as HTMLFormElement).reset();
-    }, 900);
+    setTimeout(() => setSending(false), 3000);
   };
 
   return (
@@ -74,21 +68,11 @@ export function Contact() {
                 </div>
               </div>
             </div>
-
-            <div className="rounded-2xl overflow-hidden glass aspect-[4/3]">
-              <iframe
-                title="Map"
-                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d255282.367!2d36.7073!2d-1.3032!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x182f1172d84d49a7%3A0xf7cf0254b297924c!2sNairobi!5e0!3m2!1sen!2ske!4v1700000000000"
-                width="100%"
-                height="100%"
-                style={{ border: 0, filter: "invert(0.92) hue-rotate(180deg) saturate(0.6)" }}
-                loading="lazy"
-                referrerPolicy="no-referrer-when-downgrade"
-              />
-            </div>
           </motion.div>
 
           <motion.form
+            action="https://api.web3forms.com/submit"
+            method="POST"
             initial={{ opacity: 0, x: 20 }}
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
@@ -96,11 +80,16 @@ export function Contact() {
             onSubmit={onSubmit}
             className="lg:col-span-3 glass-strong rounded-3xl p-8 space-y-5"
           >
+            <input type="hidden" name="access_key" value="6ff52103-febf-48c8-83d9-64e549f2e411" />
+
             <div className="grid sm:grid-cols-2 gap-4">
-              <Field label="Full name" name="name" placeholder="Jane Doe" />
-              <Field label="Email" name="email" type="email" placeholder="you@company.com" />
+              <Field label="Full name" name="name" placeholder="Jane Doe" defaultValue="Eric Thyaka" />
+              <Field label="Email" name="email" type="email" placeholder="you@company.com" defaultValue="stackcraftsstudio@gmail.com" />
             </div>
-            <Field label="Subject" name="subject" placeholder="What do you need?" />
+            <div className="grid sm:grid-cols-2 gap-4">
+              <Field label="Phone" name="phone" type="tel" placeholder="+254 700 000 000" defaultValue="0710911645" />
+              <Field label="Subject" name="subject" placeholder="What do you need?" />
+            </div>
             <div>
               <label className="text-sm text-muted-foreground">Project details</label>
               <textarea
@@ -136,7 +125,7 @@ export function Contact() {
   );
 }
 
-function Field({ label, name, type = "text", placeholder }: { label: string; name: string; type?: string; placeholder?: string }) {
+function Field({ label, name, type = "text", placeholder, defaultValue }: { label: string; name: string; type?: string; placeholder?: string; defaultValue?: string }) {
   return (
     <div>
       <label className="text-sm text-muted-foreground">{label}</label>
@@ -145,6 +134,7 @@ function Field({ label, name, type = "text", placeholder }: { label: string; nam
         name={name}
         type={type}
         placeholder={placeholder}
+        defaultValue={defaultValue}
         className="mt-1.5 w-full rounded-xl bg-white/5 border border-white/10 px-4 py-3 outline-none focus:border-brand-violet/60 focus:bg-white/10 transition"
       />
     </div>
