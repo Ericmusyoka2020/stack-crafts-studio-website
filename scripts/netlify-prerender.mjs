@@ -1,4 +1,4 @@
-import { copyFile, mkdir, writeFile } from 'node:fs/promises';
+import { writeFile } from 'node:fs/promises';
 import { dirname, join } from 'node:path';
 import { fileURLToPath } from 'node:url';
 
@@ -21,9 +21,5 @@ if (!html.includes('Stack Crafts Studio')) {
 
 await writeFile(outputHtml, html);
 await writeFile(join(clientDir, '_redirects'), '/* /index.html 200\n');
-
-try {
-  await copyFile(join(root, 'dist', 'server', 'assets', '_tanstack-start-manifest_v-CC8p1Y0s.js'), join(clientDir, '_tanstack-start-manifest_v.js'));
-} catch {}
 
 console.log(`Netlify homepage created at ${outputHtml}`);
