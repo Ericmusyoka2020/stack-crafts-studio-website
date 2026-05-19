@@ -93,8 +93,6 @@ export function Contact() {
           </motion.div>
 
           <motion.form
-            action="https://api.web3forms.com/submit"
-            method="POST"
             initial={{ opacity: 0, x: 20 }}
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
@@ -103,6 +101,8 @@ export function Contact() {
             className="lg:col-span-3 glass-strong rounded-3xl p-8 space-y-5"
           >
             <input type="hidden" name="access_key" value="6ff52103-febf-48c8-83d9-64e549f2e411" />
+            <input type="hidden" name="from_name" value="Stack Crafts Studio Website" />
+            <input type="checkbox" name="botcheck" className="hidden" style={{ display: "none" }} tabIndex={-1} autoComplete="off" />
 
             <div className="grid sm:grid-cols-2 gap-4">
               <Field label="Full name" name="name" placeholder="Enter your full name" />
@@ -122,6 +122,19 @@ export function Contact() {
                 className="mt-1.5 w-full rounded-xl bg-white/5 border border-white/10 px-4 py-3 outline-none focus:border-brand-violet/60 focus:bg-white/10 transition resize-none"
               />
             </div>
+
+            {status === "success" && (
+              <div className="flex items-center gap-3 rounded-xl border border-emerald-400/30 bg-emerald-400/10 px-4 py-3 text-emerald-300">
+                <CheckCircle2 className="h-5 w-5 shrink-0" />
+                <span>Form submitted successfully! We'll get back to you within 24 hours.</span>
+              </div>
+            )}
+            {status === "error" && (
+              <div className="rounded-xl border border-red-400/30 bg-red-400/10 px-4 py-3 text-red-300">
+                Something went wrong. Please try again or email us directly.
+              </div>
+            )}
+
             <div className="flex flex-wrap items-center gap-3 pt-2">
               <button
                 type="submit"
