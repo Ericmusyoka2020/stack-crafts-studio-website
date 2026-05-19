@@ -1,14 +1,36 @@
 import { useState } from "react";
 import { motion } from "motion/react";
-import { Phone, Mail, MapPin, Send, Github, Twitter, Linkedin, Instagram } from "lucide-react";
+import { Phone, Mail, MapPin, Send, Github, Twitter, Linkedin, Instagram, CheckCircle2 } from "lucide-react";
 import { SectionHeader } from "./Section";
 
 export function Contact() {
-  const [sending, setSending] = useState(false);
+  const [status, setStatus] = useState<"idle" | "sending" | "success" | "error">("idle");
+  const [errorMsg, setErrorMsg] = useState<string | null>(null);
+  const sending = status === "sending";
 
-  const onSubmit = () => {
-    setSending(true);
-    setTimeout(() => setSending(false), 3000);
+  const onSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    setStatus("sending");
+    setErrorMsg(null);
+    try {
+      const form = e.currentTarget;
+      const data = new FormData(form);
+      const res = await fetch("https://api.web3forms.com/submit", {
+        method: "POST",
+        body: data,
+        headers: { Accept: "application/json" },
+      });
+      const json = await res.json().catch(() => ({}));
+      if (res.ok && (json.success ?? true)) {
+        setStatus("success");
+        form.reset();
+      } else {
+        throw new Error(json.message || "Submission failed");
+      }
+    } catch (err) {
+      setErrorMsg(err instanceof Error ? err.message : "Submission failed");
+      setStatus("error");
+    }
   };
 
   return (
