@@ -32,6 +32,7 @@ export const Route = createFileRoute("/")({
       { name: "twitter:title", content: "Stack Crafts Studio — Smart Digital Solutions" },
       { name: "twitter:description", content: "Websites, web apps, payments, SEO & institution systems." },
       { name: "twitter:image", content: "/og-image.jpg" },
+    ],
     links: [{ rel: "canonical", href: "/" }],
   }),
   component: Index,
