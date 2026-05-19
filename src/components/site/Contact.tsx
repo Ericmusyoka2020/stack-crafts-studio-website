@@ -83,11 +83,11 @@ export function Contact() {
             <input type="hidden" name="access_key" value="6ff52103-febf-48c8-83d9-64e549f2e411" />
 
             <div className="grid sm:grid-cols-2 gap-4">
-              <Field label="Full name" name="name" placeholder="Jane Doe" defaultValue="Eric Thyaka" />
-              <Field label="Email" name="email" type="email" placeholder="you@company.com" defaultValue="stackcraftsstudio@gmail.com" />
+              <Field label="Full name" name="name" placeholder="Enter your full name" />
+              <Field label="Email" name="email" type="email" placeholder="Enter your email" />
             </div>
             <div className="grid sm:grid-cols-2 gap-4">
-              <Field label="Phone" name="phone" type="tel" placeholder="+254 700 000 000" defaultValue="0710911645" />
+              <Field label="Phone" name="phone" type="tel" placeholder="Enter phone number" />
               <Field label="Subject" name="subject" placeholder="What do you need?" />
             </div>
             <div>
