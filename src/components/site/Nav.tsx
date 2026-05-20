@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { motion } from "motion/react";
-import { Menu, X, Code2 } from "lucide-react";
+import { Menu, X } from "lucide-react";
+import logo from "@/assets/logo.jpg";
 
 const links = [
   { href: "#about", label: "About" },
