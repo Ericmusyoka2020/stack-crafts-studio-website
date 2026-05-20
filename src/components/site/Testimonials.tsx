@@ -39,7 +39,7 @@ export function Testimonials() {
 
         <div className="max-w-3xl mx-auto relative">
           <div className="glass-strong rounded-3xl p-10 md:p-14 min-h-[280px]">
-            <Quote className="h-10 w-10 text-brand-violet/60 mb-4" />
+            <Quote className="h-10 w-10 text-brand-gold/60 mb-4" />
             <AnimatePresence mode="wait">
               <motion.div
                 key={i}
@@ -51,7 +51,7 @@ export function Testimonials() {
                 <p className="text-xl md:text-2xl leading-relaxed">{items[i].quote}</p>
                 <div className="mt-6 flex items-center gap-1">
                   {Array.from({ length: items[i].rating }).map((_, k) => (
-                    <Star key={k} className="h-4 w-4 fill-brand-cyan text-brand-cyan" />
+                    <Star key={k} className="h-4 w-4 fill-brand-sky text-brand-sky" />
                   ))}
                 </div>
                 <div className="mt-4">

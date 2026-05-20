@@ -9,7 +9,7 @@ export function Hero() {
         <img src={heroBg} alt="" width={1920} height={1280} className="h-full w-full object-cover opacity-30" />
         <div className="absolute inset-0 bg-gradient-to-b from-background/40 via-background/70 to-background" />
         <div className="absolute inset-0 grid-bg opacity-60" />
-        <div className="absolute -top-20 -left-20 h-96 w-96 rounded-full bg-brand-violet/40 blur-3xl animate-blob" />
+        <div className="absolute -top-20 -left-20 h-96 w-96 rounded-full bg-brand-gold/40 blur-3xl animate-blob" />
         <div className="absolute top-1/3 right-0 h-[28rem] w-[28rem] rounded-full bg-brand-blue/30 blur-3xl animate-blob" style={{ animationDelay: "4s" }} />
       </div>
 
@@ -21,7 +21,7 @@ export function Hero() {
             transition={{ duration: 0.6 }}
             className="inline-flex items-center gap-2 rounded-full glass px-4 py-1.5 text-xs text-muted-foreground"
           >
-            <Sparkles className="h-3.5 w-3.5 text-brand-cyan" />
+            <Sparkles className="h-3.5 w-3.5 text-brand-sky" />
             Crafting digital experiences since 2019
           </motion.div>
 

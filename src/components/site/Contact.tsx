@@ -63,7 +63,7 @@ export function Contact() {
                 </span>
                 <div>
                   <div className="text-xs uppercase tracking-widest text-muted-foreground">Phone</div>
-                  <div className="font-medium group-hover:text-brand-cyan transition">+254 710 911 645</div>
+                  <div className="font-medium group-hover:text-brand-sky transition">+254 710 911 645</div>
                 </div>
               </a>
               <a href="mailto:stackcraftsstudio@gmail.com" className="flex items-start gap-4 group">
@@ -72,7 +72,7 @@ export function Contact() {
                 </span>
                 <div>
                   <div className="text-xs uppercase tracking-widest text-muted-foreground">Email</div>
-                  <div className="font-medium group-hover:text-brand-cyan transition break-all">stackcraftsstudio@gmail.com</div>
+                  <div className="font-medium group-hover:text-brand-sky transition break-all">stackcraftsstudio@gmail.com</div>
                 </div>
               </a>
               <div className="flex items-start gap-4">
@@ -129,7 +129,7 @@ export function Contact() {
                 required
                 rows={5}
                 placeholder="Tell us about your goals, timeline and budget…"
-                className="mt-1.5 w-full rounded-xl bg-white/5 border border-white/10 px-4 py-3 outline-none focus:border-brand-violet/60 focus:bg-white/10 transition resize-none"
+                className="mt-1.5 w-full rounded-xl bg-white/5 border border-white/10 px-4 py-3 outline-none focus:border-brand-gold/60 focus:bg-white/10 transition resize-none"
               />
             </div>
 
@@ -180,7 +180,7 @@ function Field({ label, name, type = "text", placeholder, defaultValue }: { labe
         type={type}
         placeholder={placeholder}
         defaultValue={defaultValue}
-        className="mt-1.5 w-full rounded-xl bg-white/5 border border-white/10 px-4 py-3 outline-none focus:border-brand-violet/60 focus:bg-white/10 transition"
+        className="mt-1.5 w-full rounded-xl bg-white/5 border border-white/10 px-4 py-3 outline-none focus:border-brand-gold/60 focus:bg-white/10 transition"
       />
     </div>
   );
