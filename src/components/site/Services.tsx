@@ -34,7 +34,7 @@ export function Services() {
               transition={{ duration: 0.45, delay: (i % 3) * 0.08 }}
               className="group relative glass rounded-2xl p-7 overflow-hidden hover:-translate-y-1 transition-all duration-300"
             >
-              <div className="absolute -top-16 -right-16 h-40 w-40 rounded-full bg-brand-violet/20 blur-3xl opacity-0 group-hover:opacity-100 transition-opacity" />
+              <div className="absolute -top-16 -right-16 h-40 w-40 rounded-full bg-brand-gold/20 blur-3xl opacity-0 group-hover:opacity-100 transition-opacity" />
               <div className="relative">
                 <div className="inline-flex h-12 w-12 items-center justify-center rounded-xl bg-white/5 border border-white/10 group-hover:bg-gradient-brand group-hover:border-transparent transition">
                   <s.icon className="h-5 w-5" />

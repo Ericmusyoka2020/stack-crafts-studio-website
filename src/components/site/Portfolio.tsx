@@ -47,7 +47,7 @@ export function Portfolio() {
               </div>
               <div className="p-6 flex items-start justify-between gap-4">
                 <div>
-                  <div className="text-xs uppercase tracking-widest text-brand-cyan">{p.category}</div>
+                  <div className="text-xs uppercase tracking-widest text-brand-sky">{p.category}</div>
                   <h3 className="mt-1.5 text-xl font-semibold">{p.title}</h3>
                   <div className="mt-3 flex flex-wrap gap-2">
                     {p.tech.map((t) => (

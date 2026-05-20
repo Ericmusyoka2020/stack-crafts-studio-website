@@ -34,7 +34,7 @@ export function Stats() {
     <section className="relative py-20">
       <div className="mx-auto max-w-7xl px-4">
         <div className="glass-strong rounded-3xl p-10 md:p-14 relative overflow-hidden">
-          <div className="absolute -top-20 -left-10 h-72 w-72 rounded-full bg-brand-violet/20 blur-3xl" />
+          <div className="absolute -top-20 -left-10 h-72 w-72 rounded-full bg-brand-gold/20 blur-3xl" />
           <div className="absolute -bottom-20 -right-10 h-72 w-72 rounded-full bg-brand-blue/20 blur-3xl" />
           <div className="relative grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
             {stats.map((s, i) => (

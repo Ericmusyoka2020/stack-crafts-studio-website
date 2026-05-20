@@ -62,7 +62,7 @@ export function Pricing() {
               <ul className="mt-7 space-y-3">
                 {t.features.map((f) => (
                   <li key={f} className="flex items-start gap-3 text-sm">
-                    <Check className={`h-4 w-4 mt-0.5 shrink-0 ${t.featured ? "" : "text-brand-cyan"}`} />
+                    <Check className={`h-4 w-4 mt-0.5 shrink-0 ${t.featured ? "" : "text-brand-sky"}`} />
                     {f}
                   </li>
                 ))}
