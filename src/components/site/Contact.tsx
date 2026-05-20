@@ -88,9 +88,13 @@ export function Contact() {
               <div className="pt-3 border-t border-white/10">
                 <div className="text-xs uppercase tracking-widest text-muted-foreground mb-3">Follow us</div>
                 <div className="flex gap-2">
-                  {[Twitter, Linkedin, Instagram, Github].map((I, k) => (
-                    <a key={k} href="#" className="h-10 w-10 rounded-xl glass inline-flex items-center justify-center hover:bg-white/10 transition">
-                      <I className="h-4 w-4" />
+                  {[
+                    { Icon: Twitter, href: "https://x.com/EricMusyok17", label: "Twitter" },
+                    { Icon: Facebook, href: "https://www.facebook.com/profile.php?id=61588936033870", label: "Facebook" },
+                    { Icon: TikTokIcon, href: "https://www.tiktok.com/@bughunter73?_r=1&_t=ZT-96Ty6nv08Oj", label: "TikTok" },
+                  ].map(({ Icon, href, label }) => (
+                    <a key={label} href={href} target="_blank" rel="noreferrer" aria-label={label} className="h-10 w-10 rounded-xl glass inline-flex items-center justify-center hover:bg-white/10 transition">
+                      <Icon className="h-4 w-4" />
                     </a>
                   ))}
                 </div>
