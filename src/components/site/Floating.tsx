@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { ArrowUp, MessageCircle, X } from "lucide-react";
+import { ArrowUp, MessageCircle, X, Send, CheckCircle2 } from "lucide-react";
 import { motion, AnimatePresence } from "motion/react";
 
 export function FloatingActions() {
