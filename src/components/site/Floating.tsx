@@ -5,6 +5,24 @@ import { motion, AnimatePresence } from "motion/react";
 export function FloatingActions() {
   const [show, setShow] = useState(false);
   const [chatOpen, setChatOpen] = useState(false);
+  const [sent, setSent] = useState(false);
+  const [sending, setSending] = useState(false);
+  const [message, setMessage] = useState("");
+  const [phone, setPhone] = useState("");
+
+  const onSend = (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!message.trim() || !phone.trim()) return;
+    setSending(true);
+    const text = encodeURIComponent(`Hi Stack Crafts, ${message}\n\nMy contact: ${phone}`);
+    window.open(`https://wa.me/254710911645?text=${text}`, "_blank");
+    setTimeout(() => {
+      setSending(false);
+      setSent(true);
+      setMessage("");
+      setPhone("");
+    }, 600);
+  };
 
   useEffect(() => {
     const on = () => setShow(window.scrollY > 400);
