@@ -38,8 +38,8 @@ export function Nav() {
           }`}
         >
           <a href="#home" className="flex items-center gap-2.5 group">
-            <span className="relative inline-flex h-9 w-9 items-center justify-center rounded-xl bg-gradient-brand glow">
-              <Code2 className="h-5 w-5 text-primary-foreground" />
+            <span className="relative inline-flex h-9 w-9 items-center justify-center rounded-xl overflow-hidden bg-white">
+              <img src={logo} alt="Stack Crafts Studio logo" className="h-full w-full object-contain" />
             </span>
             <span className="font-display text-lg font-semibold tracking-tight">
               Stack Crafts <span className="text-gradient">Studio</span>

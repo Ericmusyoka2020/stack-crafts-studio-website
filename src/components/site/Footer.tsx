@@ -1,4 +1,4 @@
-import { Code2 } from "lucide-react";
+import logo from "@/assets/logo.jpg";
 
 export function Footer() {
   return (
@@ -7,8 +7,8 @@ export function Footer() {
         <div className="grid md:grid-cols-4 gap-10">
           <div className="md:col-span-2">
             <a href="#home" className="flex items-center gap-2.5">
-              <span className="h-9 w-9 rounded-xl bg-gradient-brand inline-flex items-center justify-center glow">
-                <Code2 className="h-5 w-5 text-primary-foreground" />
+              <span className="h-9 w-9 rounded-xl overflow-hidden bg-white inline-flex items-center justify-center">
+                <img src={logo} alt="Stack Crafts Studio logo" className="h-full w-full object-contain" />
               </span>
               <span className="font-display text-lg font-semibold">
                 Stack Crafts <span className="text-gradient">Studio</span>
