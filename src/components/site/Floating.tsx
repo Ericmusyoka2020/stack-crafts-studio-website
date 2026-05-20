@@ -75,25 +75,49 @@ export function FloatingActions() {
                   </div>
                 </div>
               </div>
-              <p className="text-sm text-muted-foreground mt-4">
-                Hi 👋 How can we help you today? Reach us directly:
-              </p>
-              <div className="mt-4 space-y-2">
-                <a
-                  href="https://wa.me/254710911645"
-                  target="_blank"
-                  rel="noreferrer"
-                  className="block w-full text-center rounded-xl bg-[oklch(0.72_0.18_150)] text-black px-4 py-2.5 text-sm font-medium hover:opacity-90 transition"
-                >
-                  Chat on WhatsApp
-                </a>
-                <a
-                  href="mailto:stackcraftsstudio@gmail.com"
-                  className="block w-full text-center rounded-xl glass px-4 py-2.5 text-sm font-medium hover:bg-white/10 transition"
-                >
-                  Email us
-                </a>
-              </div>
+              {sent ? (
+                <div className="mt-5 flex flex-col items-center text-center gap-3 py-4">
+                  <CheckCircle2 className="h-10 w-10 text-[oklch(0.72_0.18_150)]" />
+                  <div className="font-semibold text-sm">Message sent successfully</div>
+                  <p className="text-xs text-muted-foreground">We'll get back to you shortly.</p>
+                  <button
+                    onClick={() => setSent(false)}
+                    className="mt-2 text-xs underline text-muted-foreground hover:text-foreground"
+                  >
+                    Send another
+                  </button>
+                </div>
+              ) : (
+                <form onSubmit={onSend} className="mt-4 space-y-3">
+                  <p className="text-sm text-muted-foreground">
+                    Hi 👋 Leave a message and your phone number — we'll reach out.
+                  </p>
+                  <textarea
+                    value={message}
+                    onChange={(e) => setMessage(e.target.value)}
+                    placeholder="Your message..."
+                    rows={3}
+                    required
+                    className="w-full rounded-xl glass px-3 py-2 text-sm bg-transparent border border-white/10 focus:outline-none focus:border-white/30 resize-none"
+                  />
+                  <input
+                    type="tel"
+                    value={phone}
+                    onChange={(e) => setPhone(e.target.value)}
+                    placeholder="Your phone number"
+                    required
+                    className="w-full rounded-xl glass px-3 py-2 text-sm bg-transparent border border-white/10 focus:outline-none focus:border-white/30"
+                  />
+                  <button
+                    type="submit"
+                    disabled={sending}
+                    className="w-full inline-flex items-center justify-center gap-2 rounded-xl bg-gradient-brand text-primary-foreground px-4 py-2.5 text-sm font-medium hover:opacity-90 transition disabled:opacity-60"
+                  >
+                    <Send className="h-4 w-4" />
+                    {sending ? "Sending..." : "Send message"}
+                  </button>
+                </form>
+              )}
             </motion.div>
           )}
         </AnimatePresence>
