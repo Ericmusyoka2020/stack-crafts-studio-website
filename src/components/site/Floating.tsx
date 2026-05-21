@@ -131,8 +131,15 @@ export function FloatingActions() {
               initial={{ opacity: 0, y: 20, scale: 0.95 }}
               animate={{ opacity: 1, y: 0, scale: 1 }}
               exit={{ opacity: 0, y: 20, scale: 0.95 }}
-              className="absolute bottom-20 right-0 w-80 glass-strong rounded-2xl p-5 shadow-card"
+              className="absolute bottom-20 right-0 w-80 rounded-2xl p-[2px] shadow-card"
+              style={{
+                background:
+                  "conic-gradient(from 0deg, #ff3d8a, #ffb800, #00e5a8, #00b3ff, #a855f7, #ff3d8a)",
+                boxShadow:
+                  "0 10px 40px rgba(255, 61, 138, 0.35), 0 6px 24px rgba(0, 179, 255, 0.3)",
+              }}
             >
+            <div className="relative rounded-[14px] p-5 bg-[#0b0b14]/95 backdrop-blur-xl">
               <button
                 onClick={() => setChatOpen(false)}
                 aria-label="Close"
@@ -142,27 +149,48 @@ export function FloatingActions() {
               </button>
 
               <div className="flex items-center gap-3 pb-3 border-b border-white/10 pr-8">
-                <div className="h-10 w-10 rounded-full bg-gradient-brand inline-flex items-center justify-center">
-                  <MessageCircle className="h-5 w-5 text-primary-foreground" />
+                <div
+                  className="h-10 w-10 rounded-full inline-flex items-center justify-center"
+                  style={{
+                    background:
+                      "conic-gradient(from 0deg, #ff3d8a, #ffb800, #00e5a8, #00b3ff, #a855f7, #ff3d8a)",
+                  }}
+                >
+                  <span className="h-8 w-8 rounded-full bg-[#0b0b14] inline-flex items-center justify-center">
+                    <MessageCircle className="h-5 w-5 text-white" />
+                  </span>
                 </div>
                 <div>
-                  <div className="font-semibold text-sm">We're live now 🎉</div>
+                  <div
+                    className="font-semibold text-sm bg-clip-text text-transparent"
+                    style={{
+                      backgroundImage:
+                        "linear-gradient(90deg, #ff3d8a, #ffb800, #00e5a8, #00b3ff, #a855f7)",
+                    }}
+                  >
+                    We're live now 🎉
+                  </div>
                   <div className="text-xs text-muted-foreground flex items-center gap-1.5">
-                    <span className="h-1.5 w-1.5 rounded-full bg-green-400 inline-block" /> Online — reply in minutes
+                    <span className="h-1.5 w-1.5 rounded-full bg-[#00e5a8] inline-block" /> Online — reply in minutes
                   </div>
                 </div>
               </div>
 
               {sent ? (
                 <div className="mt-5 flex flex-col items-center text-center gap-3 py-2">
-                  <CheckCircle2 className="h-10 w-10 text-[oklch(0.72_0.18_150)]" />
+                  <CheckCircle2 className="h-10 w-10 text-[#00e5a8]" />
                   <div className="font-semibold text-sm">Message sent successfully</div>
                   <p className="text-xs text-muted-foreground">Prefer a faster reply? Chat with us on WhatsApp.</p>
                   <a
                     href={`https://wa.me/254710911645?text=${waText}`}
                     target="_blank"
                     rel="noreferrer"
-                    className="mt-1 w-full inline-flex items-center justify-center gap-2 rounded-xl bg-[oklch(0.72_0.18_150)] text-black px-4 py-2.5 text-sm font-medium hover:opacity-90 transition"
+                    className="mt-1 w-full inline-flex items-center justify-center gap-2 rounded-xl text-white px-4 py-2.5 text-sm font-semibold hover:opacity-90 transition"
+                    style={{
+                      background:
+                        "conic-gradient(from 0deg, #ff3d8a, #ffb800, #00e5a8, #00b3ff, #a855f7, #ff3d8a)",
+                      boxShadow: "0 8px 24px rgba(0, 229, 168, 0.35)",
+                    }}
                   >
                     <WhatsAppIcon /> Chat on WhatsApp
                   </a>
@@ -190,7 +218,7 @@ export function FloatingActions() {
                     placeholder="Something to say..."
                     rows={3}
                     required
-                    className="w-full rounded-xl glass px-3 py-2 text-sm bg-transparent border border-white/10 focus:outline-none focus:border-white/30 resize-none"
+                    className="w-full rounded-xl px-3 py-2 text-sm bg-white/5 border border-white/15 text-white placeholder:text-white/50 focus:outline-none focus:border-[#00b3ff] resize-none"
                   />
                   <input
                     type="tel"
@@ -199,7 +227,7 @@ export function FloatingActions() {
                     onChange={(e) => setPhone(e.target.value)}
                     placeholder="Your phone number"
                     required
-                    className="w-full rounded-xl glass px-3 py-2 text-sm bg-transparent border border-white/10 focus:outline-none focus:border-white/30"
+                    className="w-full rounded-xl px-3 py-2 text-sm bg-white/5 border border-white/15 text-white placeholder:text-white/50 focus:outline-none focus:border-[#ff3d8a]"
                   />
                   {status === "error" && (
                     <div className="text-xs text-red-300">{errorMsg || "Something went wrong. Please try again."}</div>
@@ -207,13 +235,19 @@ export function FloatingActions() {
                   <button
                     type="submit"
                     disabled={sending}
-                    className="w-full inline-flex items-center justify-center gap-2 rounded-xl bg-gradient-brand text-primary-foreground px-4 py-2.5 text-sm font-medium hover:opacity-90 transition disabled:opacity-60"
+                    className="w-full inline-flex items-center justify-center gap-2 rounded-xl text-white px-4 py-2.5 text-sm font-semibold hover:opacity-90 transition disabled:opacity-60"
+                    style={{
+                      background:
+                        "conic-gradient(from 0deg, #ff3d8a, #ffb800, #00e5a8, #00b3ff, #a855f7, #ff3d8a)",
+                      boxShadow: "0 8px 24px rgba(255, 61, 138, 0.35)",
+                    }}
                   >
                     <Send className="h-4 w-4" />
                     {sending ? "Sending..." : "Send message"}
                   </button>
                 </form>
               )}
+            </div>
             </motion.div>
           )}
         </AnimatePresence>
