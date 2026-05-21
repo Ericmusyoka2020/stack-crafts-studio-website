@@ -2,26 +2,49 @@ import { useEffect, useState } from "react";
 import { ArrowUp, MessageCircle, X, Send, CheckCircle2 } from "lucide-react";
 import { motion, AnimatePresence } from "motion/react";
 
+function WhatsAppIcon({ className }: { className?: string }) {
+  return (
+    <svg className={className} width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+      <path d="M20.5 3.5A11.9 11.9 0 0 0 12 0C5.4 0 0 5.4 0 12c0 2.1.6 4.2 1.6 6L0 24l6.2-1.6c1.7.9 3.7 1.4 5.8 1.4 6.6 0 12-5.4 12-12 0-3.2-1.3-6.2-3.5-8.3zM12 21.8c-1.8 0-3.6-.5-5.2-1.4l-.4-.2-3.7 1 1-3.6-.2-.4A9.8 9.8 0 0 1 2.2 12C2.2 6.6 6.6 2.2 12 2.2S21.8 6.6 21.8 12 17.4 21.8 12 21.8zm5.4-7.3c-.3-.1-1.7-.9-2-1-.3-.1-.5-.1-.7.1s-.8 1-.9 1.2c-.2.2-.3.2-.6.1-.9-.4-1.8-.9-2.7-2-.7-.8-1.1-1.7-1.3-2-.1-.3 0-.4.1-.5l.4-.5.3-.5c.1-.2.1-.3 0-.5l-.7-1.7c-.2-.4-.4-.4-.6-.4h-.5c-.2 0-.5.1-.7.4-.2.3-.9.9-.9 2.2 0 1.3.9 2.6 1.1 2.8.1.2 1.8 2.8 4.4 3.9.6.3 1.1.4 1.5.5.6.2 1.2.2 1.6.1.5-.1 1.7-.7 1.9-1.3.2-.7.2-1.2.2-1.3-.1-.2-.3-.3-.6-.5z" />
+    </svg>
+  );
+}
+
 export function FloatingActions() {
   const [show, setShow] = useState(false);
   const [chatOpen, setChatOpen] = useState(false);
   const [sent, setSent] = useState(false);
-  const [sending, setSending] = useState(false);
+  const [status, setStatus] = useState<"idle" | "sending" | "error">("idle");
+  const [errorMsg, setErrorMsg] = useState<string | null>(null);
   const [message, setMessage] = useState("");
   const [phone, setPhone] = useState("");
 
-  const onSend = (e: React.FormEvent) => {
+  const onSend = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     if (!message.trim() || !phone.trim()) return;
-    setSending(true);
-    const text = encodeURIComponent(`Hi Stack Crafts, ${message}\n\nMy contact: ${phone}`);
-    window.open(`https://wa.me/254710911645?text=${text}`, "_blank");
-    setTimeout(() => {
-      setSending(false);
-      setSent(true);
-      setMessage("");
-      setPhone("");
-    }, 600);
+    setStatus("sending");
+    setErrorMsg(null);
+    try {
+      const form = e.currentTarget;
+      const data = new FormData(form);
+      const res = await fetch("https://api.web3forms.com/submit", {
+        method: "POST",
+        body: data,
+        headers: { Accept: "application/json" },
+      });
+      const json = await res.json().catch(() => ({}));
+      if (res.ok && (json.success ?? true)) {
+        setStatus("idle");
+        setSent(true);
+        setMessage("");
+        setPhone("");
+      } else {
+        throw new Error(json.message || "Submission failed");
+      }
+    } catch (err) {
+      setErrorMsg(err instanceof Error ? err.message : "Submission failed");
+      setStatus("error");
+    }
   };
 
   useEffect(() => {
@@ -29,6 +52,24 @@ export function FloatingActions() {
     window.addEventListener("scroll", on);
     return () => window.removeEventListener("scroll", on);
   }, []);
+
+  // Auto-open as an ad on first load and every 1 minute
+  useEffect(() => {
+    const open = () => {
+      setSent(false);
+      setStatus("idle");
+      setChatOpen(true);
+    };
+    const t = setTimeout(open, 800);
+    const i = setInterval(open, 60_000);
+    return () => {
+      clearTimeout(t);
+      clearInterval(i);
+    };
+  }, []);
+
+  const sending = status === "sending";
+  const waText = encodeURIComponent("Hi Stack Crafts, I'd like to chat about a project.");
 
   return (
     <>
@@ -64,50 +105,77 @@ export function FloatingActions() {
               exit={{ opacity: 0, y: 20, scale: 0.95 }}
               className="absolute bottom-20 right-0 w-80 glass-strong rounded-2xl p-5 shadow-card"
             >
-              <div className="flex items-center gap-3 pb-3 border-b border-white/10">
+              <button
+                onClick={() => setChatOpen(false)}
+                aria-label="Close"
+                className="absolute top-3 right-3 h-7 w-7 rounded-full inline-flex items-center justify-center hover:bg-white/10 transition"
+              >
+                <X className="h-4 w-4" />
+              </button>
+
+              <div className="flex items-center gap-3 pb-3 border-b border-white/10 pr-8">
                 <div className="h-10 w-10 rounded-full bg-gradient-brand inline-flex items-center justify-center">
                   <MessageCircle className="h-5 w-5 text-primary-foreground" />
                 </div>
                 <div>
-                  <div className="font-semibold text-sm">Stack Crafts Support</div>
+                  <div className="font-semibold text-sm">We're live now 🎉</div>
                   <div className="text-xs text-muted-foreground flex items-center gap-1.5">
-                    <span className="h-1.5 w-1.5 rounded-full bg-green-400 inline-block" /> Online now
+                    <span className="h-1.5 w-1.5 rounded-full bg-green-400 inline-block" /> Online — reply in minutes
                   </div>
                 </div>
               </div>
+
               {sent ? (
-                <div className="mt-5 flex flex-col items-center text-center gap-3 py-4">
+                <div className="mt-5 flex flex-col items-center text-center gap-3 py-2">
                   <CheckCircle2 className="h-10 w-10 text-[oklch(0.72_0.18_150)]" />
                   <div className="font-semibold text-sm">Message sent successfully</div>
-                  <p className="text-xs text-muted-foreground">We'll get back to you shortly.</p>
+                  <p className="text-xs text-muted-foreground">Prefer a faster reply? Chat with us on WhatsApp.</p>
+                  <a
+                    href={`https://wa.me/254710911645?text=${waText}`}
+                    target="_blank"
+                    rel="noreferrer"
+                    className="mt-1 w-full inline-flex items-center justify-center gap-2 rounded-xl bg-[oklch(0.72_0.18_150)] text-black px-4 py-2.5 text-sm font-medium hover:opacity-90 transition"
+                  >
+                    <WhatsAppIcon /> Chat on WhatsApp
+                  </a>
                   <button
                     onClick={() => setSent(false)}
-                    className="mt-2 text-xs underline text-muted-foreground hover:text-foreground"
+                    className="text-xs underline text-muted-foreground hover:text-foreground"
                   >
                     Send another
                   </button>
                 </div>
               ) : (
                 <form onSubmit={onSend} className="mt-4 space-y-3">
+                  <input type="hidden" name="access_key" value="6ff52103-febf-48c8-83d9-64e549f2e411" />
+                  <input type="hidden" name="from_name" value="Stack Crafts — Live Chat" />
+                  <input type="hidden" name="subject" value="New live chat message from website" />
+                  <input type="checkbox" name="botcheck" className="hidden" style={{ display: "none" }} tabIndex={-1} autoComplete="off" />
+
                   <p className="text-sm text-muted-foreground">
-                    Hi 👋 Leave a message and your phone number — we'll reach out.
+                    Got something to say? Drop a message and your number — we'll reach out.
                   </p>
                   <textarea
+                    name="message"
                     value={message}
                     onChange={(e) => setMessage(e.target.value)}
-                    placeholder="Your message..."
+                    placeholder="Something to say..."
                     rows={3}
                     required
                     className="w-full rounded-xl glass px-3 py-2 text-sm bg-transparent border border-white/10 focus:outline-none focus:border-white/30 resize-none"
                   />
                   <input
                     type="tel"
+                    name="phone"
                     value={phone}
                     onChange={(e) => setPhone(e.target.value)}
                     placeholder="Your phone number"
                     required
                     className="w-full rounded-xl glass px-3 py-2 text-sm bg-transparent border border-white/10 focus:outline-none focus:border-white/30"
                   />
+                  {status === "error" && (
+                    <div className="text-xs text-red-300">{errorMsg || "Something went wrong. Please try again."}</div>
+                  )}
                   <button
                     type="submit"
                     disabled={sending}
