@@ -91,10 +91,38 @@ export function FloatingActions() {
 
         <button
           onClick={() => setChatOpen((v) => !v)}
-          className="h-14 w-14 rounded-full bg-gradient-brand glow inline-flex items-center justify-center hover:scale-105 transition"
+          className="relative h-16 w-16 rounded-full inline-flex items-center justify-center transition-transform duration-200 hover:scale-110 active:scale-95 focus:outline-none focus-visible:ring-4 focus-visible:ring-white/40"
+          style={{
+            background: "conic-gradient(from 0deg, #ff3d8a, #ffb800, #00e5a8, #00b3ff, #a855f7, #ff3d8a)",
+            boxShadow:
+              "0 0 0 4px rgba(255,255,255,0.12), 0 10px 30px rgba(255, 61, 138, 0.55), 0 6px 20px rgba(0, 179, 255, 0.45)",
+            WebkitTapHighlightColor: "transparent",
+          }}
           aria-label="Live chat"
         >
-          {chatOpen ? <X className="h-6 w-6 text-primary-foreground" /> : <MessageCircle className="h-6 w-6 text-primary-foreground" />}
+          {!chatOpen && (
+            <>
+              <span
+                aria-hidden="true"
+                className="absolute inset-0 rounded-full animate-ping"
+                style={{ background: "rgba(255, 61, 138, 0.55)", animationDuration: "1.8s" }}
+              />
+              <span
+                aria-hidden="true"
+                className="absolute -top-1 -right-1 flex h-3 w-3"
+              >
+                <span className="absolute inline-flex h-full w-full rounded-full bg-[#00e5a8] opacity-75 animate-ping" />
+                <span className="relative inline-flex h-3 w-3 rounded-full bg-[#00e5a8] ring-2 ring-white" />
+              </span>
+            </>
+          )}
+          <span className="relative h-12 w-12 rounded-full bg-[#0b0b14] inline-flex items-center justify-center">
+            {chatOpen ? (
+              <X className="h-6 w-6 text-white" strokeWidth={2.5} />
+            ) : (
+              <MessageCircle className="h-6 w-6 text-white" strokeWidth={2.5} />
+            )}
+          </span>
         </button>
 
         <AnimatePresence>
