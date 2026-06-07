@@ -66,7 +66,7 @@ export function About() {
           />
           <div className="mx-auto max-w-4xl glass gradient-border rounded-2xl p-6 md:p-10 grid md:grid-cols-[260px_1fr] gap-8 items-center">
             <div
-              className="relative rounded-2xl p-[3px]"
+              className="relative rounded-2xl p-[3px] w-full"
               style={{
                 background:
                   "conic-gradient(from 0deg, #ff3d8a, #ffb800, #00e5a8, #00b3ff, #a855f7, #ff3d8a)",
@@ -75,8 +75,20 @@ export function About() {
               <img
                 src={actingCeo.url}
                 alt="Acting CEO of Stack Crafts Studio"
-                loading="lazy"
-                className="rounded-2xl w-full h-72 md:h-80 object-cover object-top bg-background"
+                loading="eager"
+                decoding="async"
+                width={520}
+                height={640}
+                referrerPolicy="no-referrer"
+                onError={(e) => {
+                  const img = e.currentTarget;
+                  if (!img.dataset.fallback) {
+                    img.dataset.fallback = "1";
+                    img.src = window.location.origin + actingCeo.url;
+                  }
+                }}
+                className="block rounded-2xl w-full h-72 md:h-80 object-cover object-top bg-background"
+                style={{ maxWidth: "100%" }}
               />
             </div>
             <div>
