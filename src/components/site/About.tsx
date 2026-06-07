@@ -1,6 +1,8 @@
 import { motion } from "motion/react";
 import { Target, Eye, ShieldCheck } from "lucide-react";
 import { SectionHeader } from "./Section";
+import actingCeo from "@/assets/acting-ceo.png.asset.json";
+
 
 const pillars = [
   {
@@ -48,7 +50,50 @@ export function About() {
             </motion.div>
           ))}
         </div>
+
+        {/* Leadership — Acting CEO */}
+        <motion.div
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: "-60px" }}
+          transition={{ duration: 0.6 }}
+          className="mt-20"
+        >
+          <SectionHeader
+            eyebrow="Leadership"
+            title={<>Meet our <span className="text-gradient">Acting CEO</span></>}
+            description="Driving Stack Crafts Studio's vision, craft and client success."
+          />
+          <div className="mx-auto max-w-4xl glass gradient-border rounded-2xl p-6 md:p-10 grid md:grid-cols-[260px_1fr] gap-8 items-center">
+            <div
+              className="relative rounded-2xl p-[3px]"
+              style={{
+                background:
+                  "conic-gradient(from 0deg, #ff3d8a, #ffb800, #00e5a8, #00b3ff, #a855f7, #ff3d8a)",
+              }}
+            >
+              <img
+                src={actingCeo.url}
+                alt="Acting CEO of Stack Crafts Studio"
+                loading="lazy"
+                className="rounded-2xl w-full h-72 md:h-80 object-cover object-top bg-background"
+              />
+            </div>
+            <div>
+              <span className="inline-block text-xs font-semibold tracking-widest uppercase text-gradient">
+                Acting CEO & Founder
+              </span>
+              <h3 className="mt-2 text-2xl md:text-3xl font-semibold">Leading with vision & craft</h3>
+              <p className="mt-4 text-muted-foreground">
+                A hands-on builder passionate about turning ideas into reliable digital products.
+                He leads Stack Crafts Studio with a sharp eye for design, a deep love for clean
+                engineering, and a relentless focus on delivering real value to every client we serve.
+              </p>
+            </div>
+          </div>
+        </motion.div>
       </div>
     </section>
   );
 }
+
