@@ -1,7 +1,7 @@
 import { motion } from "motion/react";
 import { Target, Eye, ShieldCheck } from "lucide-react";
 import { SectionHeader } from "./Section";
-import actingCeo from "@/assets/acting-ceo.png.asset.json";
+import actingCeo from "@/assets/acting-ceo.jpg.asset.json";
 
 
 const pillars = [
@@ -79,12 +79,12 @@ export function About() {
                 decoding="async"
                 width={520}
                 height={640}
-                referrerPolicy="no-referrer"
+                fetchPriority="high"
                 onError={(e) => {
                   const img = e.currentTarget;
                   if (!img.dataset.fallback) {
                     img.dataset.fallback = "1";
-                    img.src = window.location.origin + actingCeo.url;
+                    img.src = actingCeo.url;
                   }
                 }}
                 className="block rounded-2xl w-full h-72 md:h-80 object-cover object-top bg-background"
