@@ -4,11 +4,15 @@ import { fileURLToPath } from 'node:url';
 
 const root = dirname(dirname(fileURLToPath(import.meta.url)));
 const clientDir = join(root, 'dist', 'client');
-const serverEntry = join(root, 'dist', 'server', 'index.js');
+const serverEntry = join(root, 'dist', 'server', 'index.mjs');
 const outputHtml = join(clientDir, 'index.html');
 
 const { default: handler } = await import(serverEntry);
-const response = await handler.fetch(new Request('https://stackcraftsstudio.netlify.app/'), {}, {});
+const response = await handler.fetch(
+  new Request('https://stackcraftsstudio.netlify.app/'),
+  {},
+  { waitUntil: () => {}, passThroughOnException: () => {} },
+);
 
 if (!response.ok) {
   throw new Error(`Unable to prerender homepage: ${response.status} ${response.statusText}`);
