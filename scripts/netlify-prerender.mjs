@@ -8,7 +8,11 @@ const serverEntry = join(root, 'dist', 'server', 'index.mjs');
 const outputHtml = join(clientDir, 'index.html');
 
 const { default: handler } = await import(serverEntry);
-const response = await handler.fetch(new Request('https://stackcraftsstudio.netlify.app/'), {}, {});
+const response = await handler.fetch(
+  new Request('https://stackcraftsstudio.netlify.app/'),
+  {},
+  { waitUntil: () => {}, passThroughOnException: () => {} },
+);
 
 if (!response.ok) {
   throw new Error(`Unable to prerender homepage: ${response.status} ${response.statusText}`);
