@@ -4,7 +4,7 @@ import { fileURLToPath } from 'node:url';
 
 const root = dirname(dirname(fileURLToPath(import.meta.url)));
 const clientDir = join(root, 'dist', 'client');
-const serverEntry = join(root, 'dist', 'server', 'index.js');
+const serverEntry = join(root, 'dist', 'server', 'index.mjs');
 const outputHtml = join(clientDir, 'index.html');
 
 const { default: handler } = await import(serverEntry);
