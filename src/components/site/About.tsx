@@ -1,7 +1,8 @@
 import { motion } from "motion/react";
 import { Target, Eye, ShieldCheck } from "lucide-react";
 import { SectionHeader } from "./Section";
-import actingCeo from "@/assets/acting-ceo.jpg.asset.json";
+
+const actingCeoUrl = "/acting-ceo.jpg";
 
 
 const pillars = [
