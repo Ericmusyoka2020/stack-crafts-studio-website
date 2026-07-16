@@ -74,7 +74,7 @@ export function About() {
               }}
             >
               <img
-                src={actingCeo.url}
+                src={actingCeoUrl}
                 alt="Acting CEO of Stack Crafts Studio"
                 loading="eager"
                 decoding="async"
@@ -85,7 +85,7 @@ export function About() {
                   const img = e.currentTarget;
                   if (!img.dataset.fallback) {
                     img.dataset.fallback = "1";
-                    img.src = actingCeo.url;
+                    img.src = actingCeoUrl;
                   }
                 }}
                 className="block rounded-2xl w-full h-72 md:h-80 object-cover object-top bg-background"
